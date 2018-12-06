@@ -10,7 +10,6 @@ void setup() {
   // put your setup code here, to run once:
   attachInterrupt(digitalPinToInterrupt(3), fusslampe, RISING);
   Serial.begin(9600);
-  g
 }
 
 void loop() {
@@ -24,7 +23,13 @@ void loop() {
     digitalWrite(r2, HIGH);
     digitalWrite(g2, LOW);
   } else {
-    digitalWrite()
+    digitalWrite(y1, LOW);
+    delay(500);
+    digitalWrite(y1, HIGH);
+    digitalWrite(r1, LOW);
+    digitalWrite(g1, LOW);
+    digitalWrite(r1, LOW);
+    digitalWrite(g1, LOW);
   }
 
   if (wtpb) {
@@ -37,7 +42,7 @@ void loop() {
     digitalWrite(r2, LOW);
     digitalWrite(g2, HIGH);
     delay(10000);
-    g digitalWrite(g2, LOW);
+    digitalWrite(g2, LOW);
     digitalWrite(r2, HIGH);
     delay(2000);
     digitalWrite(y1, HIGH);
