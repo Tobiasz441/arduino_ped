@@ -1,3 +1,4 @@
+// Initialisierung von Variablen
 int r1 = 22;
 int g1 = 24;
 int y1 = 26;
@@ -7,15 +8,15 @@ int ldr = 13;
 int x, y;
 volatile bool wtpb = false;
 void setup() {
-  // put your setup code here, to run once:
+  // Initialisierung des Interrupts und Serial Monitors
   attachInterrupt(digitalPinToInterrupt(3), fusslampe, RISING);
   Serial.begin(9600);
 }
 
 void loop() {
   x = constrain(analogRead(A0), 200, 600);
-  y = map(x, 200, 600, 0, 255);
   Serial.println(analogRead(0));
+  // Wenn hell funktioniert die Ampel wie sonst
   if (x > 350) {
     digitalWrite(y1, LOW);
     digitalWrite(r1, LOW);
@@ -23,6 +24,7 @@ void loop() {
     digitalWrite(r2, HIGH);
     digitalWrite(g2, LOW);
   } else {
+    // Wenn dunkel blinkt nur das geble Licht
     digitalWrite(y1, LOW);
     delay(500);
     digitalWrite(y1, HIGH);
@@ -31,27 +33,34 @@ void loop() {
     digitalWrite(r1, LOW);
     digitalWrite(g1, LOW);
   }
-
+  // Wenn wtpb = richtig wird dieser Code ausgeführt
   if (wtpb) {
+    // Phase 2
     digitalWrite(g1, LOW);
     digitalWrite(y1, HIGH);
     delay(2000);
+    // Phase 3
     digitalWrite(y1, LOW);
     digitalWrite(r1, HIGH);
     delay(500);
+    // Fussgängerampel an
     digitalWrite(r2, LOW);
     digitalWrite(g2, HIGH);
     delay(10000);
+    // Fussgängerampel aus
     digitalWrite(g2, LOW);
     digitalWrite(r2, HIGH);
     delay(2000);
+    // Phase 2
     digitalWrite(y1, HIGH);
     delay(2000);
+    // Phase 1
     digitalWrite(y1, LOW);
     digitalWrite(r1, LOW);
     digitalWrite(g1, HIGH);
+    // Am ende wird wtpb auf falsch gesetzt um ein loop zu vermeiden
     wtpb = false;
   }
 }
-
+// Interrupt, wenn Button gedrückt setze wtpb auf true
 void fusslampe() { wtpb = true; }
