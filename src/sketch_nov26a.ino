@@ -53,11 +53,6 @@ void loop() {
     delay(2000);
     // Phase 2
     digitalWrite(y1, HIGH);
-    delay(2000);
-    // Phase 1
-    digitalWrite(y1, LOW);
-    digitalWrite(r1, LOW);
-    digitalWrite(g1, HIGH);
     // Am ende wird wtpb auf falsch gesetzt um ein loop zu vermeiden
     wtpb = false;
   }
